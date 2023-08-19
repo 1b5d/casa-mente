@@ -1,0 +1,23 @@
+version: '3'
+services:
+  hassio_supervisor:
+    container_name: hassio_supervisor
+    image: ghcr.io/home-assistant/amd64-hassio-supervisor:latest
+    entrypoint: ["/bin/bash", "-c", "/scripts/start_hassio.sh"]
+    privileged: true
+    network_mode: host
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    security_opt:
+      - seccomp:unconfined
+    environment:
+      - HOMEASSISTANT_REPOSITORY=homeassistant/qemux86-64-homeassistant
+      - SUPERVISOR_SHARE=${PWD}/config/
+      - SUPERVISOR_NAME=hassio_supervisor
+      - SUPERVISOR_MACHINE=generic-x86-64
+      - DBUS_SYSTEM_BUS_ADDRESS=unix:path=/var/run/dbus/system_bus_socket
+    volumes:
+      - /var/run/dbus/system_bus_socket:/var/run/dbus/system_bus_socket
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./scripts:/scripts
+      - ${PWD}/config/:/data/
