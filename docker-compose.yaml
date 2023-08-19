@@ -6,7 +6,6 @@ services:
     image: ghcr.io/home-assistant/amd64-hassio-supervisor:latest
     entrypoint: ["/bin/bash", "-c", "/scripts/start_hassio.sh"]
     privileged: true
-    network_mode: host
     extra_hosts:
       - "host.docker.internal:host-gateway"
     security_opt:
