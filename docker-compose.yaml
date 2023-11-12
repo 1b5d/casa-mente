@@ -3,7 +3,7 @@ services:
   hassio_supervisor:
     container_name: hassio_supervisor
     restart: unless-stopped
-    image: ghcr.io/home-assistant/amd64-hassio-supervisor:2023.10.1
+    image: ghcr.io/home-assistant/amd64-hassio-supervisor:2023.11.0
     entrypoint: ["/bin/bash", "-c", "/scripts/start_hassio.sh"]
     privileged: true
     extra_hosts:
